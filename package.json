@@ -43,6 +43,7 @@
     "axios": "^0.24.0",
     "crypto-js": "^4.1.1",
     "echarts": "^5.2.2",
+    "exceljs": "^4.3.0",
     "lodash-es": "^4.17.21",
     "mockjs": "^1.1.0",
     "moment": "^2.29.1",
@@ -56,7 +57,11 @@
     "vue": "^3.2.21",
     "vue-i18n": "^9.1.9",
     "vue-router": "^4.0.12",
-    "vue-types": "^4.1.1"
+    "vue-types": "^4.1.1",
+    "vxe-table": "^4.3.11",
+    "vxe-table-plugin-export-xlsx": "^3.0.4",
+    "xe-utils": "^3.5.7",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^14.1.0",
@@ -130,7 +135,11 @@
     "vite-plugin-vue-setup-extend": "^0.1.0",
     "vite-plugin-windicss": "^1.4.12",
     "vue-eslint-parser": "^8.0.1",
-    "vue-tsc": "^0.28.10"
+    "vue-tsc": "^0.28.10",
+    "vxe-table": "^4.3.11",
+    "vxe-table-plugin-export-xlsx": "^3.0.4",
+    "xe-utils": "^3.5.7",
+    "xlsx": "^0.18.5"
   },
   "resolutions": {
     "//": "Used to install imagemin dependencies, because imagemin may not be installed in China. If it is abroad, you can delete it",

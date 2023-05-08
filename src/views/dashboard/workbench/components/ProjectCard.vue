@@ -1,10 +1,11 @@
 <template>
-  <Card title="项目" v-bind="$attrs">
-    <template #extra>
+  <Card title="快捷方式" v-bind="$attrs">
+    <!-- <template #extra>
       <a-button type="link" size="small">更多</a-button>
-    </template>
+    </template> -->
 
     <template v-for="item in items" :key="item">
+      <RouterLink :to="item.action">
       <CardGrid class="!md:w-1/3 !w-full">
         <span class="flex">
           <Icon :icon="item.icon" :color="item.color" size="30" />
@@ -16,6 +17,7 @@
           <span>{{ item.date }}</span>
         </div>
       </CardGrid>
+      </RouterLink>
     </template>
   </Card>
 </template>

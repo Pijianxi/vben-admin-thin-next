@@ -1,5 +1,6 @@
 import type { App } from 'vue';
 import { Button } from './Button';
+import VXETable from 'vxe-table';
 import {
   // Need
   Button as AntButton,
@@ -14,5 +15,5 @@ export function registerGlobComp(app: App) {
     app.component(comp.name || comp.displayName, comp);
   });
 
-  app.use(Input).use(Button).use(Layout);
+  app.use(Input).use(Button).use(Layout).use(VXETable);
 }
