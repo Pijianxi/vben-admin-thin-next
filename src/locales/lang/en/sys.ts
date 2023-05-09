@@ -93,6 +93,7 @@ export default {
     mobilePlaceholder: 'Please input mobile',
     policyPlaceholder: 'Register after checking',
     diffPwd: 'The two passwords are inconsistent',
+    captchaPlaceholder: 'Please input captcha',
 
     userName: 'Username',
     password: 'Password',

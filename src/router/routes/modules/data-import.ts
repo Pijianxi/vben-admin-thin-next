@@ -18,8 +18,10 @@ const main: AppRouteModule = {
     {
       path: 'mrdataimport',
       name: 'MrDataImport',
-      component: () => import('/@/views/dataimport/import/index.vue'),
+      // component: () => import('/@/views/dataimport/import/index.vue'),
       // component: () => import('/@/views/reports/profit/index.vue'),
+       component: () => import('/@/views/dataimport/import/components/FormTable.vue'),
+     
       meta: {
         icon: 'mdi:database-search',
         title: '数据导入',

@@ -1,7 +1,7 @@
 <template>
-  <BasicTable @register="registerTable">
+  <BasicTable @register="registerTable"  @edit-change="onEditChange">
     <template #form-custom> custom-slot </template>
-    <template #headerTop>
+    <!-- <template #headerTop>
       <a-alert type="info" show-icon>
         <template #message>
           <template v-if="checkedKeys.length > 0">
@@ -13,10 +13,40 @@
           </template>
         </template>
       </a-alert>
-    </template>
-    <template #toolbar>
+    </template> -->
+    <!-- <template #toolbar>
       <a-button type="primary" @click="getFormValues">获取表单数据</a-button>
-    </template>
+    </template> -->
+     
+    <template #action="{ record }">
+        <TableAction
+          :actions="[
+            {
+              icon: 'clarity:info-standard-line',
+              tooltip: '详情',
+              onClick: handleView.bind(null, record),
+              auth: ['article:btn:detail'],
+            },
+            // {
+            //   icon: 'clarity:note-edit-line',
+            //   tooltip: '编辑',
+            //   onClick: handleEdit.bind(null, record),
+            //   auth: ['article:btn:edit'],
+            // },
+            // {
+            //   icon: 'ant-design:delete-outlined',
+            //   color: 'error',
+            //   tooltip: '删除',
+            //   auth: ['article:btn:delete'],
+            //   popConfirm: {
+            //     title: '是否确认删除',
+            //     confirm: handleDelete.bind(null, record),
+            //   },
+            // },
+          ]"
+        />
+      </template>
+     
   </BasicTable>
 </template>
 <script lang="ts">
@@ -25,15 +55,17 @@
   import { getBasicColumns, getFormConfig } from './tableData';
   import { Alert } from 'ant-design-vue';
 
-  import { demoListApi } from '/@/api/demo/table';
+  import { getTemplateList } from '/@/api/report/template';
+  import { useGo } from '/@/hooks/web/usePage';
 
   export default defineComponent({
     components: { BasicTable, AAlert: Alert },
     setup() {
       const checkedKeys = ref<Array<string | number>>([]);
+      const go = useGo();
       const [registerTable, { getForm }] = useTable({
         title: '开启搜索区域',
-        api: demoListApi,
+        api: getTemplateList,
         columns: getBasicColumns(),
         useSearchForm: true,
         formConfig: getFormConfig(),
@@ -70,6 +102,18 @@
           });
         }
       }
+      function onEditChange({ column, value, record }) {
+        // 本例
+        if (column.dataIndex === 'id') {
+          record.editValueRefs.name4.value = `${value}`;
+        }
+        console.log(column, value, record);
+      }
+
+      function handleView(record: Recordable) {
+        go('/content/article/article_detail/' + record.id);
+      }
+      
 
       return {
         registerTable,
@@ -77,6 +121,9 @@
         checkedKeys,
         onSelect,
         onSelectAll,
+        onEditChange,
+        // createActions,
+        handleView,
       };
     },
   });

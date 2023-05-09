@@ -138,7 +138,7 @@
     "vue-tsc": "^0.28.10",
     "vxe-table": "^4.3.11",
     "vxe-table-plugin-export-xlsx": "^3.0.4",
-    "xe-utils": "^3.5.7",
+  
     "xlsx": "^0.18.5"
   },
   "resolutions": {

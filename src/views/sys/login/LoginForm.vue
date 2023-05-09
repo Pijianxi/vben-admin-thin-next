@@ -25,6 +25,21 @@
       />
     </FormItem>
 
+    <FormItem name="captcha">
+      <ARow class="enter-x">
+        <ACol :span="18">
+          <Input
+            v-model:value="formData.captcha"
+            size="large"
+            :placeholder="t('sys.login.captcha')"
+          />
+        </ACol>
+        <ACol :span="5" style="margin-left: 10px">
+          <img :src="captchaImg" alt="" @click="getCaptchaImg" />
+        </ACol>
+      </ARow>
+    </FormItem>
+
     <ARow class="enter-x">
       <ACol :span="12">
         <FormItem>
@@ -82,7 +97,7 @@
   </Form>
 </template>
 <script lang="ts" setup>
-  import { reactive, ref, unref, computed } from 'vue';
+  import { reactive, ref, unref, computed , onBeforeMount } from 'vue';
 
   import { Checkbox, Form, Input, Row, Col, Button, Divider } from 'ant-design-vue';
   import {
@@ -101,6 +116,7 @@
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '/@/hooks/web/useDesign';
   //import { onKeyStroke } from '@vueuse/core';
+  import { getCaptcha } from '/@/api/sys/common/captcha';
 
   const ACol = Col;
   const ARow = Row;
@@ -117,10 +133,15 @@
   const formRef = ref();
   const loading = ref(false);
   const rememberMe = ref(false);
+  const captchaImg = ref('');
 
   const formData = reactive({
-    account: 'vben',
-    password: '123456',
+    // account: 'vben',
+    // password: '123456',
+    account: '',
+    password: '',
+    captchaId: '',
+    captcha: '',
   });
 
   const { validForm } = useFormValid(formRef);
@@ -129,14 +150,32 @@
 
   const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
 
+  //获取验证码
+  async function getCaptchaImg() {
+        let result = await getCaptcha();
+        formData.captchaId = result.captchaId;
+        // get user info
+        captchaImg.value = result.imgBase64;
+      }
+
+    onBeforeMount(async () => {
+        await getCaptchaImg();
+      });
+
   async function handleLogin() {
     const data = await validForm();
     if (!data) return;
     try {
       loading.value = true;
       const userInfo = await userStore.login({
+        // password: data.password,
+        // username: data.account,
+        // mode: 'none', //不要默认的错误提示
         password: data.password,
         username: data.account,
+        captcha: data.captcha,
+        captchaId: formData.captchaId,
+        rememberMe: rememberMe.value,
         mode: 'none', //不要默认的错误提示
       });
       if (userInfo) {

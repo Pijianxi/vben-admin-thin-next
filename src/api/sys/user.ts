@@ -1,13 +1,14 @@
 import { defHttp } from '/@/utils/http/axios';
-import { LoginParams, LoginResultModel, GetUserInfoModel } from './model/userModel';
+import { LoginParams, LoginResultModel, GetUserInfoModel ,UnlockParams} from './model/userModel';
 
 import { ErrorMessageMode } from '/#/axios';
 
 enum Api {
-  Login = '/login',
-  Logout = '/logout',
-  GetUserInfo = '/getUserInfo',
-  GetPermCode = '/getPermCode',
+  Login = '/auth/login',
+  Logout = '/auth/logout',
+  GetUserInfo = '/account/info',
+  GetPermCode = '/auth/getPermCode',
+  unlockApi = '/auth/unlock',
 }
 
 /**
@@ -38,4 +39,19 @@ export function getPermCode() {
 
 export function doLogout() {
   return defHttp.get({ url: Api.Logout });
+}
+
+/**
+ * @description: user login api
+ */
+export function unlockApi(params: UnlockParams, mode: ErrorMessageMode = 'modal') {
+  return defHttp.post<boolean>(
+    {
+      url: Api.unlockApi,
+      params,
+    },
+    {
+      errorMessageMode: mode,
+    },
+  );
 }

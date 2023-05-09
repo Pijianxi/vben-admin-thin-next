@@ -3,46 +3,63 @@ import { FormProps, FormSchema } from '/@/components/Table';
 import { BasicColumn } from '/@/components/Table/src/types/table';
 import { VxeFormItemProps, VxeGridPropTypes } from '/@/components/VxeTable';
 
+
+const subjectOptions: LabelValueOptions = [
+  {
+    label: '损益主题',
+    value: 'profit',
+  },
+  {
+    label: '费用主题',
+    value: 'expense',
+  },
+  {
+    label: '库存主题',
+    value: 'inventory',
+  } 
+];
+
 export function getBasicColumns(): BasicColumn[] {
   return [
     {
-      title: 'ID',
+      title: '序号',
       dataIndex: 'id',
       fixed: 'left',
-      width: 200,
+      width: 50,
     },
     {
-      title: '姓名',
+      title: '主题',
+      dataIndex: 'subjectName',
+      width: 150,
+      // filters: [
+      //   { text: 'Male', value: 'male' },
+      //   { text: 'Female', value: 'female' },
+      // ],
+    },
+    {
+      title: '模板名称',
       dataIndex: 'name',
       width: 150,
-      filters: [
-        { text: 'Male', value: 'male' },
-        { text: 'Female', value: 'female' },
-      ],
     },
-    {
-      title: '地址',
-      dataIndex: 'address',
-    },
-    {
-      title: '编号',
-      dataIndex: 'no',
-      width: 150,
-      sorter: true,
-      defaultHidden: true,
-    },
-    {
-      title: '开始时间',
-      width: 150,
-      sorter: true,
-      dataIndex: 'beginTime',
-    },
-    {
-      title: '结束时间',
-      width: 150,
-      sorter: true,
-      dataIndex: 'endTime',
-    },
+    // {
+    //   title: '编号',
+    //   dataIndex: 'no',
+    //   width: 150,
+    //   sorter: true,
+    //   defaultHidden: true,
+    // },
+    // {
+    //   title: '开始时间',
+    //   width: 150,
+    //   sorter: true,
+    //   dataIndex: 'beginTime',
+    // },
+    // {
+    //   title: '结束时间',
+    //   width: 150,
+    //   sorter: true,
+    //   dataIndex: 'endTime',
+    // },
   ];
 }
 
@@ -232,17 +249,42 @@ export function getFormConfig(): Partial<FormProps> {
   return {
     labelWidth: 100,
     schemas: [
-      ...getAdvanceSchema(5),
+      // ...getAdvanceSchema(5),
+      // {
+      //   field: `field11`,
+      //   label: `Slot示例`,
+      //   component: 'Select',
+      //   slot: 'custom',
+      //   colProps: {
+      //     xl: 12,
+      //     xxl: 8,
+      //   },
+      // },
       {
-        field: `field11`,
-        label: `Slot示例`,
+        field: `subjectCode`,
+        label: `主题`,
         component: 'Select',
-        slot: 'custom',
+        // slot: 'custom',
+        componentProps:{
+          options: subjectOptions,
+        },
+        
+
         colProps: {
           xl: 12,
           xxl: 8,
         },
       },
+      {
+        field: `name`,
+        label: `模板名称`,
+        component: 'Input',
+        // slot: 'custom',
+        colProps: {
+          xl: 12,
+          xxl: 8,
+        },
+      }
     ],
   };
 }

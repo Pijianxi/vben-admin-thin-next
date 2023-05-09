@@ -4,6 +4,9 @@
 export interface LoginParams {
   username: string;
   password: string;
+  captcha: string;
+  captchaId: string;
+  rememberMe: boolean;
 }
 
 export interface RoleInfo {
@@ -35,4 +38,12 @@ export interface GetUserInfoModel {
   avatar: string;
   // 介绍
   desc?: string;
+}
+
+/**
+ * @description: unlock parameters
+ */
+export interface UnlockParams {
+  username: string;
+  password: string;
 }
