@@ -14,7 +14,7 @@
   
   import { PageWrapper } from '/@/components/Page';
 
-  import FormTable from './components/EditCellTable.vue';
+  import FormTable from './components/TemplateColEdit.vue';
   import TempFormTable from './components/TemplateFormTable.vue';
 
   const loading = ref(true);

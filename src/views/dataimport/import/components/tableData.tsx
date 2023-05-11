@@ -21,12 +21,12 @@ const subjectOptions: LabelValueOptions = [
 
 export function getBasicColumns(): BasicColumn[] {
   return [
-    {
-      title: '序号',
-      dataIndex: 'id',
-      fixed: 'left',
-      width: 50,
-    },
+    // {
+    //   title: '序号1',
+    //   dataIndex: 'seq',
+    //   fixed: 'left',
+    //   width: 50,
+    // },
     {
       title: '主题',
       dataIndex: 'subjectName',
@@ -41,6 +41,13 @@ export function getBasicColumns(): BasicColumn[] {
       dataIndex: 'name',
       width: 150,
     },
+    // {
+    //   width: 160,
+    //   title: '操作',
+    //   align: 'center',
+    //   slots: { default: 'action' },
+    //   fixed: 'right',
+    // },
     // {
     //   title: '编号',
     //   dataIndex: 'no',

@@ -135,11 +135,7 @@
     "vite-plugin-vue-setup-extend": "^0.1.0",
     "vite-plugin-windicss": "^1.4.12",
     "vue-eslint-parser": "^8.0.1",
-    "vue-tsc": "^0.28.10",
-    "vxe-table": "^4.3.11",
-    "vxe-table-plugin-export-xlsx": "^3.0.4",
-  
-    "xlsx": "^0.18.5"
+    "vue-tsc": "^0.28.10"
   },
   "resolutions": {
     "//": "Used to install imagemin dependencies, because imagemin may not be installed in China. If it is abroad, you can delete it",

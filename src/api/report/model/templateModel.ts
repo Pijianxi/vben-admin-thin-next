@@ -12,6 +12,46 @@ export interface TemplateInfoModel{
 
 }
 
+export interface BcnAdjustInfoModel{
+
+  id: number;
+  year: number;
+  month: number;
+  monthTxt: string;
+  org: string;
+  orgTxt: string;
+  subjectCode: string;
+  subjectTxt: string;
+  itemCode: string;
+  itemTxt: string;
+  channelCode: string;
+  channelTxt: string;
+  value: number;
+  
+
+}
+
+export interface TemplateColInfoModel{
+
+  id: number;
+  templateId: number;
+  templateCode: string;
+  tableName: string;
+  tableColumnName: string;
+  columnDataType: string;
+  inputType: string;
+  colCode: string;
+  colName: string;
+  codeType: string;
+  codeTypeName: string;
+  isCondition: string;
+  isNotNull: string;
+  isShow:string;
+  orderNo:number;
+  
+
+}
+
 
 export interface TemplateListItem {
   id: string;
@@ -52,3 +92,5 @@ export interface TemplateSearchModel {
 
 // export type ArticleListGetResultModel = BasicFetchResult<ArticleInfoModel>;
 export type TemplateListGetResultModel = BasicFetchResult<TemplateInfoModel>;
+export type TemplateColListGetResultModel = BasicFetchResult<TemplateColInfoModel>;
+export type BcnAdjustListGetResultModel = BasicFetchResult<BcnAdjustInfoModel>;

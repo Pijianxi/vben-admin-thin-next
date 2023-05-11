@@ -22,29 +22,29 @@
         <TableAction
          
           :actions="[
-            {
-              icon: 'clarity:info-standard-line',
-              tooltip: '详情',
+            // {
+            //   icon: 'clarity:info-standard-line',
+            //   tooltip: '详情',
              
-              onClick: handleView.bind(null, record),
-            //  auth: ['article:btn:detail'],
+            //   onClick: handleView.bind(null, record),
+            // //  auth: ['article:btn:detail'],
+            // },
+            {
+              icon: 'clarity:note-edit-line',
+              tooltip: '编辑',
+              onClick: handleEdit.bind(null, record),
+              // auth: ['article:btn:edit'],
             },
-            // {
-            //   icon: 'clarity:note-edit-line',
-            //   tooltip: '编辑',
-            //   onClick: handleEdit.bind(null, record),
-            //   // auth: ['article:btn:edit'],
-            // },
-            // {
-            //   icon: 'ant-design:delete-outlined',
-            //   color: 'error',
-            //   tooltip: '删除',
-            //   auth: ['article:btn:delete'],
-            //   popConfirm: {
-            //     title: '是否确认删除',
-            //     confirm: handleDelete.bind(null, record),
-            //   },
-            // },
+            {
+              icon: 'ant-design:delete-outlined',
+              color: 'error',
+              tooltip: '删除',
+              auth: ['article:btn:delete'],
+              popConfirm: {
+                title: '是否确认删除',
+                confirm: handleDelete.bind(null, record),
+              },
+            },
           ]"
         />
       </template>
@@ -54,10 +54,10 @@
 <script lang="ts">
   import { defineComponent, ref } from 'vue';
   import { BasicTable, useTable ,TableAction} from '/@/components/Table';
-  import { getBasicColumns, getFormConfig } from './tableData';
+  import { getBasicColumns, getFormConfig } from './bcnAdjustTableData';
   import { Alert } from 'ant-design-vue';
 
-  import { getTemplateList } from '/@/api/report/template';
+  import { getBcnAdjustList } from '/@/api/report/template';
   import { useGo } from '/@/hooks/web/usePage';
 
   export default defineComponent({
@@ -67,7 +67,7 @@
       const go = useGo();
       const [registerTable, { getForm }] = useTable({
         // title: '开启搜索区域',
-        api: getTemplateList,
+        api: getBcnAdjustList,
         columns: getBasicColumns(),
         useSearchForm: true,
         formConfig: getFormConfig(),
@@ -121,12 +121,14 @@
       }
 
       function handleView(record: Recordable) {
-        go('/data-import/import/import_detail/' + record.id);
+        go('/data-import/import_detail/' + record.id);
       }
       function handleEdit(record: Recordable) {
-        go('/data-import/import/import_detail/' + record.id);
+        go('/dataadmin/import/import_detail/' + record.id);
       }
-      
+      function handleDelete(record: Recordable) {
+        console.log('点击了删除', record);
+      }
 
       return {
         registerTable,
@@ -138,6 +140,7 @@
         // createActions,
         handleView,
         handleEdit,
+        handleDelete
       };
     },
   });

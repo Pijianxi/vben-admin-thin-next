@@ -17,9 +17,9 @@
   import { ActionItem, TableAction } from '/@/components/Table';
   import { PageWrapper } from '/@/components/Page';
   import { useMessage } from '/@/hooks/web/useMessage';
-  import { vxeTableColumns, vxeTableFormSchema } from './tableData';
+  import { vxeTableColumns, vxeTableFormSchema } from './vxeTableData';
   import { BasicTableProps, VxeBasicTable, VxeGridInstance } from '/@/components/VxeTable';
-  import { demoListApi } from '/@/api/demo/table';
+  import { getBcnAdjustList ,BcnAdjustAdd,BcnAdjustEdit} from '/@/api/report/template';
 
   const { createMessage } = useMessage();
 
@@ -72,17 +72,20 @@
     proxyConfig: {
       ajax: {
         query: async ({ page, form }) => {
-          return demoListApi({
+
+          console.log("query------");
+          return getBcnAdjustList({
             pageNum: page.currentPage,
             pageSize: page.pageSize,
             ...form,
           });
         },
         queryAll: async ({ form }) => {
-          return await demoListApi(form);
+          return await getBcnAdjustList(form);
         },
       },
     },
+    
   });
 
   // 操作按钮（权限控制）
